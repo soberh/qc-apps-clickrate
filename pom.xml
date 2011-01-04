@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>qc</groupId>
+	<artifactId>qc-apps-clickrate</artifactId>
+	<version>1.0</version>
+	<name>qc-apps-clickrate</name>
+	<dependencies>
+		<dependency>
+			<!-- jsoup HTML parser library @ http://jsoup.org/ -->
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<!--
+			<dependency> <groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId> <version>4.0.3</version>
+			</dependency>
+		-->
+	</dependencies>
+	<build>
+		<defaultGoal>package</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+						<manifestEntries>
+							<Version>${project.version}</Version>
+						</manifestEntries>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>qc.apps.clickrate.SimpleMain</mainClass>
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<properties>
+		<maven.test.skip>true</maven.test.skip>
+	</properties>
+</project>

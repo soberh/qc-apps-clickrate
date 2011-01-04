@@ -1,0 +1,8 @@
+﻿qc-apps-clickrate changelog
+==========================
+https://github.com/soberh/qc-apps-clickrate
+
+
+Changes in version 1.0 (2010-12-25)
+-------------------------------------
+* initialize：repeat open url.
