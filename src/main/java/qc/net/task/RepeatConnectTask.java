@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.nodes.Document;
 
 import qc.net.ConnectionUtils;
 
@@ -33,20 +34,27 @@ public class RepeatConnectTask extends TimerTask {
 		this.cookies = cookies;
 	}
 
+	protected String getUrl(String url, long count) {
+		return url;
+	}
+
 	@Override
 	public void run() {
 		try {
 			currentCount++;
+			String url = getUrl(this.url, currentCount);
 			if (logger.isInfoEnabled())
 				logger
 						.info("currentCount=" + currentCount + ";url="
-								+ this.url);
-
+								+ url);
+			Document doc;
 			if ("post".equalsIgnoreCase(method)) {
-				ConnectionUtils.post(url, params, cookies);
+				doc = ConnectionUtils.post(url, params, cookies);
 			} else {
-				ConnectionUtils.get(url, cookies);
+				doc = ConnectionUtils.get(url, cookies);
 			}
+			
+			afterRun(doc);
 
 			if (maxCount <= currentCount) {
 				this.cancel();
@@ -56,5 +64,9 @@ public class RepeatConnectTask extends TimerTask {
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
+	}
+
+	protected void afterRun(Document doc) {
+		// do nothing
 	}
 }

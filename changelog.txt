@@ -3,6 +3,13 @@
 https://github.com/soberh/qc-apps-clickrate
 
 
+Changes in version 2.0 (2010-12-29)
+-------------------------------------
+* make a eclipse swt gui to run application.
+* move file 'src/main/resources/log4j.xml' to foder 'support/log4.xml'
+* change foder 'lib' to 'support/lib'.
+* use assembly plugin to make a zip package,like 'qc-apps-clickrate-2.0-win32.zip',see more in README.md.
+
 Changes in version 1.0 (2010-12-25)
 -------------------------------------
 * initialize：repeat open url.

@@ -55,7 +55,7 @@ public class ConnectionUtils {
 		return connect(url, "post", params, userAgent, headers, cookies);
 	}
 
-	private static Document connect(String url, String method,
+	public static Document connect(String url, String method,
 			Map<String, String> params, String userAgent,
 			Map<String, String> headers, Map<String, String> cookies)
 			throws IOException {
@@ -110,12 +110,12 @@ public class ConnectionUtils {
 	}
 
 	/**
-	 * ä½¿ç”¨é€‰æ‹©å™¨éªŒè¯è·å–æ–‡æ¡£çš„æ­£ç¡®æ€§
+	 * Ê¹ÓÃÑ¡ÔñÆ÷ÑéÖ¤»ñÈ¡ÎÄµµµÄÕıÈ·ĞÔ
 	 * 
 	 * @param doc
 	 * @param selector
 	 * @param containsValue
-	 *            åº”è¯¥åŒ…å«çš„å­—ç¬¦ä¸²
+	 *            Ó¦¸Ã°üº¬µÄ×Ö·û´®
 	 * @return
 	 */
 	public static boolean validate(Document doc, String selector,
@@ -135,7 +135,7 @@ public class ConnectionUtils {
 
 	public static boolean loginTo(String loginUrl,
 			Map<String, String> loginParams, String toUrl) throws Exception {
-		// ç™»å½•
+		// µÇÂ¼
 		Map<String, String> cookies = new HashMap<String, String>();
 		post(loginUrl, loginParams, cookies);
 		String sessionId1 = cookies.get("JSESSIONID");
@@ -143,7 +143,7 @@ public class ConnectionUtils {
 			logger.debug("sessionId1=" + sessionId1);
 		}
 
-		// ä½¿ç”¨åŒä¸€sessionè·³åˆ°toUrl
+		// Ê¹ÓÃÍ¬Ò»sessionÌøµ½toUrl
 		get(toUrl, cookies);
 		String sessionId2 = cookies.get("JSESSIONID");
 		boolean success = sessionId1 != null && sessionId1.equals(sessionId2);
@@ -156,14 +156,14 @@ public class ConnectionUtils {
 	}
 
 	/**
-	 * é‡å¤è¿æ¥æŒ‡å®šçš„url
+	 * ÖØ¸´Á¬½ÓÖ¸¶¨µÄurl
 	 * 
 	 * @param num
-	 *            è¿æ¥æ¬¡æ•°
+	 *            Á¬½Ó´ÎÊı
 	 * @param interval
-	 *            æ¯æ¬¡è¿æ¥é—´çš„æ—¶é—´é—´éš”(æ¯«ç§’)
+	 *            Ã¿´ÎÁ¬½Ó¼äµÄÊ±¼ä¼ä¸ô(ºÁÃë)
 	 * @param url
-	 *            è¦è¿æ¥çš„ç½‘ç«™
+	 *            ÒªÁ¬½ÓµÄÍøÕ¾
 	 */
 	public static void repeatGet(int num, int interval, String url) {
 		Timer timer = new Timer();

@@ -5,12 +5,11 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.xml.DOMConfigurator;
 
 import qc.net.ConnectionUtils;
 
-public class SimpleMain {
-	private static final Log logger = LogFactory.getLog(SimpleMain.class);
+public class ConsoleMain {
+	private static final Log logger = LogFactory.getLog(ConsoleMain.class);
 
 	/**
 	 * @param args
@@ -18,8 +17,7 @@ public class SimpleMain {
 	public static void main(String[] args) {
 		try {
 			// 配置log4j
-			DOMConfigurator.configure(SimpleMain.class
-					.getResource("/log4j.xml"));
+			Config.initLoger();
 
 			// args[0] -- 要访问的url
 			// args[1] -- 循环次数

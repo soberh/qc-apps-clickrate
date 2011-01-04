@@ -1,11 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>qc</groupId>
+	<groupId>qc.apps</groupId>
 	<artifactId>qc-apps-clickrate</artifactId>
-	<version>1.0</version>
+	<version>2.0</version>
 	<name>qc-apps-clickrate</name>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>3.0.5.RELEASE</version>
+		</dependency>
+
 		<dependency>
 			<!-- jsoup HTML parser library @ http://jsoup.org/ -->
 			<groupId>org.jsoup</groupId>
@@ -28,12 +34,35 @@
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 		</dependency>
-		<!--
-			<dependency> <groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId> <version>4.0.3</version>
-			</dependency>
-		-->
+		<!-- <dependency> -->
+		<!-- <groupId>org.eclipse.swt.win32.win32</groupId> -->
+		<!-- <artifactId>x86</artifactId> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.0.3</version>
+		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.eclipse.swt.win32.win32</groupId>
+				<artifactId>x86</artifactId>
+				<version>3.3.0-v3346</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.swt.gtk.linux</groupId>
+				<artifactId>x86</artifactId>
+				<version>3.3.0-v3346</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.swt.carbon</groupId>
+				<artifactId>macosx</artifactId>
+				<version>3.3.0-v3346</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<defaultGoal>package</defaultGoal>
 		<plugins>
@@ -48,8 +77,8 @@
 						</manifestEntries>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>qc.apps.clickrate.SimpleMain</mainClass>
-							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>qc.apps.clickrate.GUIMain</mainClass>
+							<classpathPrefix>support/lib/</classpathPrefix>
 						</manifest>
 					</archive>
 				</configuration>
@@ -66,7 +95,7 @@
 							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<outputDirectory>${project.build.directory}/support/lib</outputDirectory>
 							<overWriteReleases>false</overWriteReleases>
 							<overWriteSnapshots>false</overWriteSnapshots>
 							<overWriteIfNewer>true</overWriteIfNewer>
@@ -74,9 +103,150 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<!-- <version>2.4.3</version> -->
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<!-- here the phase you need -->
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>support/**</include>
+										<include>start.bat</include>
+									</includes> 
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<!-- <descriptorRef>jar-with-dependencies</descriptorRef> -->
+					</descriptorRefs>
+					<descriptors>
+						<descriptor>src/main/assembly/descriptor.xml</descriptor>
+						<!-- <descriptor>src/main/assembly/win32.xml</descriptor> -->
+						<!-- <descriptor>src/main/assembly/linux-gtk.xml</descriptor> -->
+						<!-- <descriptor>src/main/assembly/macosx.xml</descriptor> -->
+					</descriptors>
+					<finalName>${project.artifactId}-${project.version}-${project.os}</finalName>
+				</configuration>
+			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<source>1.5</source>
+						<target>1.5</target>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.4.3</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<!-- 替换属性文件中的${...}标记的值 -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/log4j.xml</include>
+				</includes>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
 	</build>
 	<properties>
 		<maven.test.skip>true</maven.test.skip>
+		<project.os>win32</project.os>
 	</properties>
+	<profiles>
+		<profile>
+			<id>win32</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>project.os</name>
+					<value>win32</value>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.eclipse.swt.win32.win32</groupId>
+					<artifactId>x86</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>linux-gtk</id>
+			<activation>
+				<property>
+					<name>project.os</name>
+					<value>linux-gtk</value>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.eclipse.swt.gtk.linux</groupId>
+					<artifactId>x86</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>macosx</id>
+			<activation>
+				<property>
+					<name>project.os</name>
+					<value>macosx</value>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.eclipse.swt.carbon</groupId>
+					<artifactId>macosx</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 </project>

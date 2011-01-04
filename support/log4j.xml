@@ -11,13 +11,21 @@
 			 --> 
 		</layout>  
 	</appender>
+	
+    <!-- GUI的日志信息配置 -->
+	<appender name="gui" class="qc.log.impl.log4j.EclipseSWTTextAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss} %5p %5c{1}] %m%n"/>
+		</layout>  
+	</appender>
+
 
     <!-- 日志文件的配置 -->
 	<appender name="rollingFile" class="org.apache.log4j.RollingFileAppender">
 		<param name="MaxFileSize"  value="1024KB"/>
 		<param name="MaxBackupIndex" value="4"/> 
 
-		<param name="File" value="qc-apps-clickrate.log"/> 
+		<param name="File" value="app.log"/> 
 		
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p [%l] - %m%n"/>
@@ -25,7 +33,7 @@
 	</appender>
     
 	<!-- this -->
-	<category name="qc.net">
+	<category name="qc">
 	  <priority value="INFO" />
 	</category>
     	
@@ -35,5 +43,6 @@
 	   <priority value ="ERROR" />
    	   <appender-ref ref="console" />
    	   <appender-ref ref="rollingFile" />
+   	   <appender-ref ref="gui" />
 	</root>
 </log4j:configuration>
