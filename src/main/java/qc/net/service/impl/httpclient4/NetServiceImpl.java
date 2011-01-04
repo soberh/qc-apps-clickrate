@@ -5,11 +5,17 @@ import java.net.HttpURLConnection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,6 +31,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.util.EntityUtils;
 
+import qc.apps.clickrate.Config;
 import qc.net.NetUtils;
 import qc.net.service.Callback;
 import qc.net.service.NetService;
@@ -129,8 +136,9 @@ public class NetServiceImpl implements NetService {
 		// 设置超时
 		if (timeout > 0)
 			httpClient.getParams().setParameter(
-					CoreConnectionPNames.CONNECTION_TIMEOUT, new Integer(timeout));
-		
+					CoreConnectionPNames.CONNECTION_TIMEOUT,
+					new Integer(timeout));
+
 		HttpUriRequest request;
 
 		// set method
@@ -191,7 +199,7 @@ public class NetServiceImpl implements NetService {
 	public void repeat(final String id, final int num, int interval,
 			final Method method, final String url,
 			final Map<String, String> headers, final Map<String, String> sid,
-			final Callback callback) {
+			final Callback<Integer> callback) {
 		this.repeat(id, num, interval, method, url, headers, sid, callback,
 				null);
 	}
@@ -199,7 +207,8 @@ public class NetServiceImpl implements NetService {
 	public void repeat(final String id, final int num, int interval,
 			final Method method, final String url,
 			final Map<String, String> headers, final Map<String, String> sid,
-			final Callback callback, final List<ProxyConfig> proxyConfigs) {
+			final Callback<Integer> callback,
+			final List<ProxyConfig> proxyConfigs) {
 		if (logger.isDebugEnabled()) {
 			logger.warn("id=" + id);
 			logger.warn("num=" + num);
@@ -262,12 +271,13 @@ public class NetServiceImpl implements NetService {
 
 	public void stopRepeat(String id) {
 		Timer timer = timers.get(id);
-		if (timer == null)
+		if (timer == null) {
 			logger.warn("定时器没有启动!");
-
-		timer.cancel();
-		timers.remove(id);
-		logger.warn("定时器已被取消!");
+		} else {
+			timer.cancel();
+			timers.remove(id);
+			logger.warn("定时器已被取消!");
+		}
 	}
 
 	public void stopAllRepeat() {
@@ -275,5 +285,92 @@ public class NetServiceImpl implements NetService {
 		for (Entry<String, Timer> entry : timers.entrySet()) {
 			entry.getValue().cancel();
 		}
+	}
+
+	private ExecutorService threadPool;
+
+	public void stopMulti() {
+		if (threadPool == null) {
+			logger.warn("连接线程未启动!");
+		} else if (threadPool.isTerminated()) {
+			logger.warn("连接线程已全部运行完毕!");
+			threadPool = null;
+		} else {
+			threadPool.shutdownNow();
+			threadPool = null;
+			logger.warn("连接线程已被终止!");
+		}
+	}
+
+	public void multithreaded(String id, int num, Method method, String url,
+			Map<String, Object> params, List<ProxyConfig> proxyConfigs,
+			final Callback<int[]> callback) {
+		final long start = new Date().getTime();
+		int maxThreadCunt = Integer.parseInt(Config
+				.getValue("app.conn.max-thread-count"));
+		int timeout = Integer.parseInt(Config.getValue("app.conn.timeout"));
+		maxThreadCunt = Math.max(2, maxThreadCunt);
+		logger.warn("并发线程数：" + maxThreadCunt);
+		if (timeout > 0)
+			logger.warn("连接超时控制为：" + timeout + "毫秒");
+		threadPool = Executors.newFixedThreadPool(maxThreadCunt);
+		final ExecutorService pool = threadPool;
+		final Set<Future<ThreadResult>> futures = new LinkedHashSet<Future<ThreadResult>>();
+
+		boolean useProxy = (proxyConfigs != null && !proxyConfigs.isEmpty());
+		int proxyCount = useProxy ? proxyConfigs.size() : 0;
+		ProxyConfig proxyConfig;
+		for (int i = 0; i < num; i++) {
+			if (useProxy) {
+				proxyConfig = proxyConfigs.get(i % proxyCount);
+			} else {
+				proxyConfig = null;
+			}
+			RequestTask task = new RequestTask("TH" + (i + 1), url, method,
+					params, proxyConfig);
+			task.setTimeout(timeout);
+			Future<ThreadResult> future = pool.submit(task);
+			futures.add(future);
+		}
+
+		// 开启一个检测线程，待上面的线程完成后调用callback
+		Thread thread = new Thread(new Runnable() {
+			public void run() {
+				int i = 0, success = 0, failed = 0;
+				for (Future<ThreadResult> future : futures) {
+					ThreadResult r;
+					String msg = "TH" + (i + 1) + " 连接异常";
+					try {
+						r = future.get();// 等待线程完成并获取其运行结果
+						if (r.getCode() == 200) {
+							success++;
+						} else {
+							failed++;
+						}
+					} catch (InterruptedException e) {
+						msg += ",e=" + e.getMessage();
+						logger.error(msg, e);
+						failed++;
+					} catch (ExecutionException e) {
+						msg += ",e=" + e.getMessage();
+						logger.error(msg, e);
+						failed++;
+					}
+					i++;
+				}
+				if (callback != null) {
+					callback.call(new int[] { success, failed });
+				}
+
+				logger.warn("全部共" + futures.size() + "个连接已完成,成功" + success
+						+ "个,失败" + failed + "个,耗时"
+						+ (int) (new Date().getTime() - start) + "毫秒");
+				futures.clear();
+
+				pool.shutdown();
+			}
+		});
+
+		thread.start();
 	}
 }

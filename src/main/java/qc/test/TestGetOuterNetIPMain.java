@@ -1,4 +1,4 @@
-package qc.net;
+package qc.test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,10 +8,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.xml.DOMConfigurator;
 
-import qc.net.task.GetOuterNetIPTask;
 
-public class OuterNetIPMain {
-	private static final Log logger = LogFactory.getLog(OuterNetIPMain.class);
+/**
+ * 获取本机访问外网的ip的值的测试类
+ * @author dragon
+ *
+ */
+public class TestGetOuterNetIPMain {
+	private static final Log logger = LogFactory.getLog(TestGetOuterNetIPMain.class);
 
 	/**
 	 * @param args
@@ -19,7 +23,7 @@ public class OuterNetIPMain {
 	public static void main(String[] args) {
 		try {
 			// 配置log4j
-			DOMConfigurator.configure(OuterNetIPMain.class
+			DOMConfigurator.configure(TestGetOuterNetIPMain.class
 					.getResource("/log4j.xml"));
 
 			// args[0] -- 循环次数

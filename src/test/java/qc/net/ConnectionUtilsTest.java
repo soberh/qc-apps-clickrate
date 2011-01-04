@@ -13,6 +13,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import qc.test.ConnectionUtils;
+
 public class ConnectionUtilsTest {
 	@BeforeClass
 	public static void beforeClass() throws Exception {

@@ -308,7 +308,7 @@ public class ClickRate1 {
 		shlClickRate.setImage(SWTResourceManager.getImage(ClickRate1.class,
 				"/icon.png"));
 		shlClickRate.setSize(626, 530);
-		shlClickRate.setText("Click Rate 3.0");
+		shlClickRate.setText("Click Rate 4.0a1");
 
 		textLog = new Text(shlClickRate, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
 		textLog.setText("");
@@ -328,44 +328,65 @@ public class ClickRate1 {
 		btnStart.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				cur = 0;
 				btnStart.setEnabled(false);
 				btnStop.setEnabled(true);
 				logger.fatal("开始");
 				String url = getUrl();
-				Map<String, String> headers = NetUtils.getDefaultHeaders();
-				headers.put("User-Agent", NetUtils.getDefaultUserAgent());
+				// Map<String, String> headers = NetUtils.getDefaultHeaders();
 				int num = ClickRate1.this.spinnerRepeatNum.getSelection();
-				int interval = NetUtils.getInterval(
-						ClickRate1.this.spinnerInterval.getSelection(),
-						ClickRate1.this.comboUnit.getText());
-
-				ClickRate1.this.netService.repeat(
-						TID,
-						num,
-						interval,
-						NetService.Method.GET,
-						url,
-						headers,
-						null,
-						new Callback() {
-							public void call(int c) {
-								if (c == -1) {
-									Display.getDefault().syncExec(
-											new Runnable() {
-												public void run() {
-													btnStart.setEnabled(true);
-													btnStop.setEnabled(false);
-												}
-											});
-								} else {
-									cur = c;
-								}
+				ClickRate1.this.netService.multithreaded(TID, num,
+						NetService.Method.GET, url, null, proxyConfigs,
+						new Callback<int[]>() {
+							public void call(int[] result) {
+								Display.getDefault().syncExec(new Runnable() {
+									public void run() {
+										btnStart.setEnabled(true);
+										btnStop.setEnabled(false);
+									}
+								});
 							}
-						},
-						(ClickRate1.this.chkUseProxy.getSelection() ? ClickRate1.this.proxyConfigs
-								: null));
+						});
 			}
+			// public void widgetSelected(SelectionEvent e) {
+			// cur = 0;
+			// btnStart.setEnabled(false);
+			// btnStop.setEnabled(true);
+			// logger.fatal("开始");
+			// String url = getUrl();
+			// Map<String, String> headers = NetUtils.getDefaultHeaders();
+			// headers.put("User-Agent", NetUtils.getDefaultUserAgent());
+			// int num = ClickRate1.this.spinnerRepeatNum.getSelection();
+			// int interval = NetUtils.getInterval(
+			// ClickRate1.this.spinnerInterval.getSelection(),
+			// ClickRate1.this.comboUnit.getText());
+			//
+			// ClickRate1.this.netService.repeat(
+			// TID,
+			// num,
+			// interval,
+			// NetService.Method.GET,
+			// url,
+			// headers,
+			// null,
+			// new Callback() {
+			// public void call(int c) {
+			// if (c == -1) {
+			// Display.getDefault().syncExec(
+			// new Runnable() {
+			// public void run() {
+			// btnStart.setEnabled(true);
+			// btnStop.setEnabled(false);
+			// }
+			// });
+			// } else {
+			// cur = c;
+			// }
+			// }
+			// },
+			// (ClickRate1.this.chkUseProxy.getSelection() ?
+			// ClickRate1.this.proxyConfigs
+			// : null));
+			// }
 
 		});
 		btnStart.setText("开始");
@@ -376,7 +397,8 @@ public class ClickRate1 {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				logger.fatal("停止");
-				ClickRate1.this.netService.stopRepeat(TID);
+				//ClickRate1.this.netService.stopRepeat(TID);
+				ClickRate1.this.netService.stopMulti();
 				btnStart.setEnabled(true);
 				btnStop.setEnabled(false);
 			}

@@ -1,1 +1,1 @@
-java -classpath qc-apps-clickrate-3.0.jar qc.apps.clickrate.GUIMain
+java -classpath qc-apps-clickrate-4.0a1.jar qc.apps.clickrate.GUIMain

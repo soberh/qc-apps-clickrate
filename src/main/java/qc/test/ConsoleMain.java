@@ -1,4 +1,4 @@
-package qc.apps.clickrate;
+package qc.test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import qc.net.ConnectionUtils;
+import qc.apps.clickrate.Config;
 
 public class ConsoleMain {
 	private static final Log logger = LogFactory.getLog(ConsoleMain.class);

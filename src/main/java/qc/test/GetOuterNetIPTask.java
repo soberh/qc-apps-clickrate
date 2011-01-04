@@ -1,4 +1,4 @@
-package qc.net.task;
+package qc.test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.nodes.Document;
+
 
 public class GetOuterNetIPTask extends RepeatConnectTask {
 	private static final Log logger = LogFactory

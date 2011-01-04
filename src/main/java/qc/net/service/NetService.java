@@ -56,11 +56,33 @@ public interface NetService {
 	 */
 	void repeat(String id, int num, int interval, Method method, String url,
 			Map<String, String> headers, Map<String, String> sid,
-			Callback callback);
+			Callback<Integer> callback);
 
 	void repeat(String id, int num, int interval, Method method, String url,
 			Map<String, String> headers, Map<String, String> sid,
-			Callback callback, List<ProxyConfig> proxyConfigs);
+			Callback<Integer> callback, List<ProxyConfig> proxyConfigs);
+
+	/**
+	 * 使用多线程并发访问
+	 * 
+	 * @param id
+	 * @param num
+	 *            连接次数
+	 * @param method
+	 *            请求的方法：get|post
+	 * @param url
+	 *            要访问的网址
+	 * @param params
+	 *            请求附加的参数
+	 * @param proxyConfigs
+	 *            可用代理
+	 * @param callback
+	 */
+	void multithreaded(String id, int num, Method method, String url,
+			Map<String, Object> params, List<ProxyConfig> proxyConfigs,
+			Callback<int[]> callback);
+	
+	void stopMulti();
 
 	/**
 	 * 终止指定的重复连接
@@ -77,7 +99,8 @@ public interface NetService {
 	 * @param proxy
 	 * @param url
 	 * @param method
-	 * @param timeout 超时控制
+	 * @param timeout
+	 *            超时控制
 	 * @return 连接耗时
 	 */
 	int proxySpeedTest(ProxyConfig proxy, String url, Method method, int timeout);

@@ -111,7 +111,7 @@ public class NetServiceImpl implements NetService {
 	public void repeat(final String id, final int num, int interval,
 			final Method method, final String url,
 			final Map<String, String> headers, final Map<String, String> sid,
-			final Callback callback) {
+			final Callback<Integer> callback) {
 		if (logger.isDebugEnabled()) {
 			logger.warn("id=" + id);
 			logger.warn("num=" + num);
@@ -184,7 +184,7 @@ public class NetServiceImpl implements NetService {
 
 	public void repeat(String id, int num, int interval, Method method,
 			String url, Map<String, String> headers, Map<String, String> sid,
-			Callback callback, List<ProxyConfig> proxyConfigs) {
+			Callback<Integer> callback, List<ProxyConfig> proxyConfigs) {
 		// TODO Auto-generated method stub
 
 	}
@@ -193,5 +193,17 @@ public class NetServiceImpl implements NetService {
 			int timeout) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public void multithreaded(String id, int num, Method method,
+			String url, Map<String, Object> params,
+			List<ProxyConfig> proxyConfigs, Callback<int[]> callback) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void stopMulti() {
+		// TODO Auto-generated method stub
+		
 	}
 }

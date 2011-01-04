@@ -3,11 +3,17 @@
 https://github.com/soberh/qc-apps-clickrate
 
 
+Changes in version 4.0a1 (2011-01-03)
+-------------------------------------
+* multithread support
+
+
 Changes in version 3.0 (2011-01-01)
 -------------------------------------
 * auto find proxy from www.proxycn.com. see 'support/app.xml' config
 * cycle each proxy to open url 
 * auto test proxy connect speed.
+* clean some code.
 
 
 Changes in version 2.0 (2010-12-29)

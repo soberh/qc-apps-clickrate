@@ -20,7 +20,6 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,21 +31,18 @@ import qc.apps.clickrate.Config;
  * @author dragon
  * 
  */
-public class MutiThreadRequestTest {
+public class MutiThreadRequestWithFutureTest {
 	private static final Log logger = LogFactory
-			.getLog(MutiThreadRequestTest.class);
+			.getLog(MutiThreadRequestWithFutureTest.class);
 
 	@Before
 	public void setUp() throws Exception {
 		Config.init();
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	@Test
 	public void test() throws NoSuchAlgorithmException {
+		//ExcutorService es = Excutors.n;
 		SchemeRegistry schemeRegistry = new SchemeRegistry();
 		// 注册http协议模式
 		Scheme http = new Scheme("http", PlainSocketFactory.getSocketFactory(),

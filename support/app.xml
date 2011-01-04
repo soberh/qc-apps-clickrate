@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+	<!-- 自动获取可用代理的配置 -->
 	<entry key="app.proxy_finder.selector">tr[bgcolor=#fbfbfb]</entry>
 	<entry key="app.proxy_finder.parser">qc.net.service.proxy.impl.ProxyConfigParser4ProxyCN</entry>
 	<entry key="app.proxy_finder.url">
@@ -9,5 +10,11 @@
 		;http://www.proxycn.com/countryTT.php
 		;http://www.proxycn.com/html_proxy/countryWT-1.html
 		;http://www.proxycn.com/html_proxy/countryGD-1.html
-</entry>
+	</entry>
+	
+	<!-- 连接超时控制 -->
+	<entry key="app.conn.timeout">10000</entry>
+	
+	<!-- 最大并发访问线程数 -->
+	<entry key="app.conn.max-thread-count">10</entry>
 </properties>

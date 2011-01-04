@@ -1,4 +1,4 @@
-package qc.net;
+package qc.test;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,7 +15,7 @@ import org.jsoup.Connection.Method;
 import org.jsoup.Connection.Response;
 import org.jsoup.nodes.Document;
 
-import qc.net.task.RepeatConnectTask;
+import qc.net.NetUtils;
 
 public class ConnectionUtils {
 	private static final Log logger = LogFactory.getLog(ConnectionUtils.class);
@@ -110,12 +110,12 @@ public class ConnectionUtils {
 	}
 
 	/**
-	 * Ê¹ÓÃÑ¡ÔñÆ÷ÑéÖ¤»ñÈ¡ÎÄµµµÄÕýÈ·ÐÔ
+	 * Ê¹ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½È¡ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½
 	 * 
 	 * @param doc
 	 * @param selector
 	 * @param containsValue
-	 *            Ó¦¸Ã°üº¬µÄ×Ö·û´®
+	 *            Ó¦ï¿½Ã°ï¿½ï¿½ï¿½Ö·ï¿½
 	 * @return
 	 */
 	public static boolean validate(Document doc, String selector,
@@ -135,7 +135,7 @@ public class ConnectionUtils {
 
 	public static boolean loginTo(String loginUrl,
 			Map<String, String> loginParams, String toUrl) throws Exception {
-		// µÇÂ¼
+		// ï¿½ï¿½Â¼
 		Map<String, String> cookies = new HashMap<String, String>();
 		post(loginUrl, loginParams, cookies);
 		String sessionId1 = cookies.get("JSESSIONID");
@@ -143,7 +143,7 @@ public class ConnectionUtils {
 			logger.debug("sessionId1=" + sessionId1);
 		}
 
-		// Ê¹ÓÃÍ¬Ò»sessionÌøµ½toUrl
+		// Ê¹ï¿½ï¿½Í¬Ò»sessionï¿½ï¿½toUrl
 		get(toUrl, cookies);
 		String sessionId2 = cookies.get("JSESSIONID");
 		boolean success = sessionId1 != null && sessionId1.equals(sessionId2);
@@ -156,14 +156,14 @@ public class ConnectionUtils {
 	}
 
 	/**
-	 * ÖØ¸´Á¬½ÓÖ¸¶¨µÄurl
+	 * ï¿½Ø¸ï¿½lï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½url
 	 * 
 	 * @param num
-	 *            Á¬½Ó´ÎÊý
+	 *            lï¿½Ó´ï¿½ï¿½ï¿½
 	 * @param interval
-	 *            Ã¿´ÎÁ¬½Ó¼äµÄÊ±¼ä¼ä¸ô(ºÁÃë)
+	 *            Ã¿ï¿½ï¿½lï¿½Ó¼ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 	 * @param url
-	 *            ÒªÁ¬½ÓµÄÍøÕ¾
+	 *            Òªlï¿½Óµï¿½ï¿½ï¿½Õ¾
 	 */
 	public static void repeatGet(int num, int interval, String url) {
 		Timer timer = new Timer();

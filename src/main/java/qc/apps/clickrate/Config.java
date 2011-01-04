@@ -13,8 +13,6 @@ import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.swt.widgets.Text;
 
 import qc.log.impl.log4j.EclipseSWTTextAppender;
-import qc.net.service.proxy.ProxyConfigService;
-import qc.net.service.proxy.impl.ProxyConfigServiceImpl;
 
 public class Config {
 	private static final Log logger = LogFactory.getLog(Config.class);

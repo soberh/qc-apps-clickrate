@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>qc.apps</groupId>
 	<artifactId>qc-apps-clickrate</artifactId>
-	<version>3.0</version>
+	<version>4.0a1</version>
 	<name>qc-apps-clickrate</name>
 	<dependencies>
 		<dependency>

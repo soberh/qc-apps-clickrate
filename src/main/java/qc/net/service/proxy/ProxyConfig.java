@@ -74,4 +74,12 @@ public class ProxyConfig implements Serializable {
 		ProxyConfig cfg = (ProxyConfig) obj;
 		return this.ip.equals(cfg.getIp()) && this.port == cfg.getPort();
 	}
+
+	public String label() {
+		StringBuffer s = new StringBuffer();
+		s.append(ip != null ? ip : "null");
+		s.append(":" + port);
+		s.append((desc != null ? "-" + desc : ""));
+		return s.toString();
+	}
 }
