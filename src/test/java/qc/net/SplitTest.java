@@ -33,4 +33,11 @@ public class SplitTest {
 		Assert.assertEquals("value1", params.get("key1"));
 		Assert.assertEquals("value2", params.get("key2"));
 	}
+
+	@Test
+	public void test2() throws Exception {
+		String url = "key1\nvalue\r\nkey2\rvalue2";
+		String[] kvs = url.split(";|\r\n|\r|\n");
+		Assert.assertEquals(4, kvs.length);
+	}
 }

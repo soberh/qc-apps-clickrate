@@ -3,8 +3,8 @@ package qc.apps.clickrate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import qc.net.service.NetService;
-import qc.net.service.impl.jsoup.NetServiceImpl;
+import qc.net.service.impl.httpclient4.NetServiceImpl;
+import qc.net.service.proxy.impl.ProxyConfigServiceImpl;
 
 public class GUIMain {
 	private static final Log logger = LogFactory.getLog(GUIMain.class);
@@ -15,14 +15,14 @@ public class GUIMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//Config.initLoger();
 		try {
+			Config.init();
 			ClickRate1 window = new ClickRate1();
-			NetService netService = new NetServiceImpl();
-			window.setNetService(netService);
+			window.setNetService(new NetServiceImpl());
+			window.setProxyConfigService(new ProxyConfigServiceImpl());
 			window.open();
 		} catch (Exception e) {
-			logger.error(e.getMessage(),e);
+			logger.error(e.getMessage(), e);
 		}
 	}
 

@@ -19,7 +19,7 @@
 			<outputDirectory></outputDirectory>
 			<includes>
 				<include>*.jar</include>
-				<include>support/log4j.xml</include>
+				<include>support/*.xml</include>
 			</includes>
 		</fileSet>
 	</fileSets>

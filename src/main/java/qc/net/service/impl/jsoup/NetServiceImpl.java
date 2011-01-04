@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Timer;
@@ -19,6 +20,7 @@ import qc.net.NetUtils;
 import qc.net.service.Callback;
 import qc.net.service.NetService;
 import qc.net.service.ResponseValidator;
+import qc.net.service.proxy.ProxyConfig;
 
 public class NetServiceImpl implements NetService {
 	private static final Log logger = LogFactory.getLog(NetServiceImpl.class);
@@ -27,6 +29,14 @@ public class NetServiceImpl implements NetService {
 
 	public void setValidator(ResponseValidator validator) {
 		this.validator = validator;
+	}
+
+	public boolean isProxy() {
+		return false;
+	}
+
+	public void setProxy(boolean proxy) {
+
 	}
 
 	public boolean connect(Method method, String url,
@@ -132,11 +142,11 @@ public class NetServiceImpl implements NetService {
 							logger.warn("定时器循环完毕!");
 						this.cancel();
 						stopRepeat(id);
-						if (callback != null){
+						if (callback != null) {
 							callback.call(-1);
 						}
-					}else{
-						if (callback != null){
+					} else {
+						if (callback != null) {
 							callback.call(cur);
 						}
 					}
@@ -159,9 +169,29 @@ public class NetServiceImpl implements NetService {
 	}
 
 	public void stopAllRepeat() {
-		//释放定时器的线程资源
-		for(Entry<String,Timer> entry : timers.entrySet()){
+		// 释放定时器的线程资源
+		for (Entry<String, Timer> entry : timers.entrySet()) {
 			entry.getValue().cancel();
 		}
+	}
+
+	public boolean connect(Method method, String url,
+			Map<String, String> headers, Map<String, String> sid,
+			ProxyConfig proxyConfig) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void repeat(String id, int num, int interval, Method method,
+			String url, Map<String, String> headers, Map<String, String> sid,
+			Callback callback, List<ProxyConfig> proxyConfigs) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public int proxySpeedTest(ProxyConfig proxy, String url, Method method,
+			int timeout) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>49</comment>
+<entry key="203.176.105.33">{"ip":"203.176.105.33","port":80,"type":"HTTP","desc":"澳大利亚 ProxyCN","ms":1406}</entry>
+<entry key="189.254.215.3">{"ip":"189.254.215.3","port":8080,"type":"HTTP","desc":"墨西哥 ProxyCN","ms":1250}</entry>
+<entry key="61.220.57.86">{"ip":"61.220.57.86","port":3128,"type":"HTTP","desc":"台湾省台北市 中华电信","ms":531}</entry>
+<entry key="202.103.218.87">{"ip":"202.103.218.87","port":808,"type":"HTTP","desc":"广西百色市 电信","ms":1703}</entry>
+<entry key="203.127.200.47">{"ip":"203.127.200.47","port":8080,"type":"HTTP","desc":"新加坡 ProxyCN","ms":1218}</entry>
+<entry key="58.19.176.200">{"ip":"58.19.176.200","port":8080,"type":"HTTP","desc":"湖北省宜昌市 网通","ms":547}</entry>
+<entry key="66.199.222.68">{"ip":"66.199.222.68","port":80,"type":"HTTP","desc":"美国 明尼苏达州","ms":1672}</entry>
+<entry key="194.94.69.94">{"ip":"194.94.69.94","port":3128,"type":"HTTP","desc":"德国 ProxyCN","ms":1829}</entry>
+<entry key="203.88.213.134">{"ip":"203.88.213.134","port":808,"type":"HTTP","desc":"广东省广州市 中海宽带","ms":1859}</entry>
+<entry key="222.161.137.205">{"ip":"222.161.137.205","port":8080,"type":"HTTP","desc":"吉林省延吉市 网通","ms":671}</entry>
+<entry key="91.214.146.11">{"ip":"91.214.146.11","port":3128,"type":"HTTP","desc":"捷克 ProxyCN","ms":1953}</entry>
+<entry key="219.150.93.44">{"ip":"219.150.93.44","port":8080,"type":"HTTP","desc":"天津市 电信","ms":266}</entry>
+<entry key="144.135.18.205">{"ip":"144.135.18.205","port":80,"type":"HTTP","desc":"澳大利亚 ProxyCN","ms":1390}</entry>
+<entry key="59.46.67.106">{"ip":"59.46.67.106","port":8080,"type":"HTTP","desc":"辽宁省沈阳市 广电宽带(电信出口)","ms":297}</entry>
+<entry key="127.0.0.1">{"ip":"127.0.0.1","port":0,"type":"HTTP","desc":"本机","ms":281}</entry>
+<entry key="220.167.224.24">{"ip":"220.167.224.24","port":80,"type":"HTTP","desc":"青海省西宁市 电信","ms":375}</entry>
+<entry key="202.98.208.186">{"ip":"202.98.208.186","port":3128,"type":"HTTP","desc":"贵州省遵义市 电信ADSL","ms":235}</entry>
+<entry key="219.135.215.37">{"ip":"219.135.215.37","port":8080,"type":"HTTP","desc":"广东省广州市 电信ADSL","ms":579}</entry>
+<entry key="219.153.49.173">{"ip":"219.153.49.173","port":8080,"type":"HTTP","desc":"重庆市 电信","ms":969}</entry>
+<entry key="58.248.245.225">{"ip":"58.248.245.225","port":80,"type":"HTTP","desc":"广东省广州市联通","ms":375}</entry>
+<entry key="221.0.181.203">{"ip":"221.0.181.203","port":3128,"type":"HTTP","desc":"山东省青岛市 网通","ms":282}</entry>
+<entry key="124.115.4.26">{"ip":"124.115.4.26","port":8081,"type":"HTTP","desc":"陕西省 电信","ms":422}</entry>
+<entry key="116.52.149.60">{"ip":"116.52.149.60","port":8080,"type":"HTTP","desc":"云南省昆明市 电信","ms":469}</entry>
+<entry key="221.195.254.14">{"ip":"221.195.254.14","port":80,"type":"HTTP","desc":"河北省沧州市 联通","ms":313}</entry>
+<entry key="119.1.174.28">{"ip":"119.1.174.28","port":3128,"type":"HTTP","desc":"贵州省黔东南州 电信","ms":297}</entry>
+<entry key="190.202.124.18">{"ip":"190.202.124.18","port":3128,"type":"HTTP","desc":"委内瑞拉ProxyCN","ms":891}</entry>
+<entry key="119.38.129.43">{"ip":"119.38.129.43","port":80,"type":"HTTP","desc":"广东省 联通","ms":782}</entry>
+<entry key="220.167.224.19">{"ip":"220.167.224.19","port":80,"type":"HTTP","desc":"青海省西宁市 电信","ms":1047}</entry>
+<entry key="204.236.215.236">{"ip":"204.236.215.236","port":80,"type":"HTTP","desc":"美国ProxyCN","ms":1125}</entry>
+<entry key="222.77.14.56">{"ip":"222.77.14.56","port":8088,"type":"HTTP","desc":"福建省泉州市电信ADSL","ms":546}</entry>
+<entry key="222.77.14.55">{"ip":"222.77.14.55","port":8088,"type":"HTTP","desc":"福建省泉州市 电信ADSL","ms":500}</entry>
+<entry key="222.77.14.54">{"ip":"222.77.14.54","port":8088,"type":"HTTP","desc":"福建省泉州市电信ADSL","ms":578}</entry>
+<entry key="202.98.123.126">{"ip":"202.98.123.126","port":8080,"type":"HTTP","desc":"四川省成都市 电信IDC机房","ms":360}</entry>
+<entry key="125.95.189.82">{"ip":"125.95.189.82","port":8080,"type":"HTTP","desc":"广东省佛山市南海区 平洲汇联网吧","ms":281}</entry>
+<entry key="122.225.100.13">{"ip":"122.225.100.13","port":8080,"type":"HTTP","desc":"浙江省湖州市 电信","ms":563}</entry>
+<entry key="187.115.19.12">{"ip":"187.115.19.12","port":80,"type":"HTTP","desc":"拉美地区 ProxyCN","ms":1719}</entry>
+<entry key="61.164.40.151">{"ip":"61.164.40.151","port":8080,"type":"HTTP","desc":"浙江省杭州市 电信","ms":219}</entry>
+<entry key="219.142.70.32">{"ip":"219.142.70.32","port":80,"type":"HTTP","desc":"北京市 电信","ms":1344}</entry>
+<entry key="122.225.19.181">{"ip":"122.225.19.181","port":3128,"type":"HTTP","desc":"浙江省嘉兴市 电信","ms":360}</entry>
+<entry key="219.159.107.71">{"ip":"219.159.107.71","port":80,"type":"HTTP","desc":"广西桂林市 (全州县)电信","ms":1703}</entry>
+<entry key="221.231.114.147">{"ip":"221.231.114.147","port":3128,"type":"HTTP","desc":"江苏省盐城市 (东台市)电信","ms":1828}</entry>
+<entry key="213.251.154.218">{"ip":"213.251.154.218","port":3128,"type":"HTTP","desc":"法国 ProxyCN","ms":1391}</entry>
+<entry key="12.174.27.73">{"ip":"12.174.27.73","port":8080,"type":"HTTP","desc":"美国ATT用户","ms":797}</entry>
+<entry key="122.225.100.5">{"ip":"122.225.100.5","port":8080,"type":"HTTP","desc":"浙江省湖州市 电信","ms":1578}</entry>
+<entry key="213.251.154.217">{"ip":"213.251.154.217","port":3128,"type":"HTTP","desc":"法国 ProxyCN","ms":1422}</entry>
+<entry key="125.46.34.28">{"ip":"125.46.34.28","port":8080,"type":"HTTP","desc":"河南省郑州市 联通IDC机房","ms":391}</entry>
+<entry key="59.51.72.50">{"ip":"59.51.72.50","port":80,"type":"HTTP","desc":"湖南省衡阳市 电信","ms":297}</entry>
+<entry key="118.182.246.56">{"ip":"118.182.246.56","port":8080,"type":"HTTP","desc":"甘肃省 电信","ms":546}</entry>
+<entry key="221.179.35.73">{"ip":"221.179.35.73","port":80,"type":"HTTP","desc":"广东省 移动","ms":406}</entry>
+</properties>

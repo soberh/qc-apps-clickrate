@@ -30,6 +30,11 @@ public class NetUtils {
 						"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.10 (KHTML, like Gecko) Chrome/8.0.552.224 Safari/534.10");
 		userAgents.put("ie6",
 				"Mozilla/4.0 (compatible; MSIE 6.0; Windows 2000)");
+		userAgents
+				.put("firefox3",
+						"Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13");
+		userAgents.put("httpClient4.0", "Apache-HttpClient/4.0.3 (java 1.5)");
+
 	}
 
 	public static String getTestUrl() {

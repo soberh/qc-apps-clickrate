@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>qc.apps</groupId>
 	<artifactId>qc-apps-clickrate</artifactId>
-	<version>2.0</version>
+	<version>3.0</version>
 	<name>qc-apps-clickrate</name>
 	<dependencies>
 		<dependency>
@@ -12,6 +12,11 @@
 			<version>3.0.5.RELEASE</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.6</version>
+		</dependency>
 		<dependency>
 			<!-- jsoup HTML parser library @ http://jsoup.org/ -->
 			<groupId>org.jsoup</groupId>
@@ -124,7 +129,7 @@
 									<includes>
 										<include>support/**</include>
 										<include>start.bat</include>
-									</includes> 
+									</includes>
 								</resource>
 							</resources>
 						</configuration>

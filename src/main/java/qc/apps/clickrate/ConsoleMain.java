@@ -16,8 +16,7 @@ public class ConsoleMain {
 	 */
 	public static void main(String[] args) {
 		try {
-			// 配置log4j
-			Config.initLoger();
+			Config.init();
 
 			// args[0] -- 要访问的url
 			// args[1] -- 循环次数

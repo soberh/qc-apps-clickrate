@@ -1,6 +1,9 @@
 package qc.net.service;
 
+import java.util.List;
 import java.util.Map;
+
+import qc.net.service.proxy.ProxyConfig;
 
 /**
  * 网络连接接口
@@ -34,6 +37,9 @@ public interface NetService {
 	boolean connect(Method method, String url, Map<String, String> headers,
 			Map<String, String> sid);
 
+	boolean connect(Method method, String url, Map<String, String> headers,
+			Map<String, String> sid, ProxyConfig proxyConfig);
+
 	/**
 	 * 重复连接指定的网址
 	 * 
@@ -52,6 +58,10 @@ public interface NetService {
 			Map<String, String> headers, Map<String, String> sid,
 			Callback callback);
 
+	void repeat(String id, int num, int interval, Method method, String url,
+			Map<String, String> headers, Map<String, String> sid,
+			Callback callback, List<ProxyConfig> proxyConfigs);
+
 	/**
 	 * 终止指定的重复连接
 	 * 
@@ -60,4 +70,15 @@ public interface NetService {
 	void stopRepeat(String id);
 
 	void stopAllRepeat();
+
+	/**
+	 * 代理连接速度测试
+	 * 
+	 * @param proxy
+	 * @param url
+	 * @param method
+	 * @param timeout 超时控制
+	 * @return 连接耗时
+	 */
+	int proxySpeedTest(ProxyConfig proxy, String url, Method method, int timeout);
 }
