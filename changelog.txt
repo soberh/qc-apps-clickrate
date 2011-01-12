@@ -1,4 +1,4 @@
-﻿qc-apps-clickrate changelog
+﻿qc-apps-clickrate changelog 
 ==========================
 https://github.com/soberh/qc-apps-clickrate
 
